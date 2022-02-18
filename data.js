@@ -5,7 +5,7 @@ let numberOfQuestionsAnswered = 0;
 let numberOfCorrectAnswers = 0;
 let audioSuccess = new Audio('sounds/small-success.mp3');
 let audioFail = new Audio('sounds/fail.mp3');
-let audioFinal = new Audio('sounds/success.mp3');
+let audioFinal = new Audio('sounds/final-success.mp3');
 
 function loadQuestions() {
     
