@@ -30,24 +30,27 @@ function renderNextButton(index) {
 }
 
 function renderQuestion(index) {
+    let currentQuestion = questions[index];
     //show question
-    getId("card-title").innerHTML = questions[index]['question'];
+    getId("card-title").innerHTML = currentQuestion['question'];
     //randomize order of answer possibilities
     let shuffledOrder = fisherYatesShuffle();
     //show answer possibilities
     for (let i = 0; i < numberOfAnswers; i++) {
-        const answer = questions[index].answers[shuffledOrder[i]];
+        const answer = currentQuestion.answers[shuffledOrder[i]];
         const correctAnswerIndex = shuffledOrder.indexOf(questions[index].correctIndex);
         // show answer
         getId(`answer-${i}`).innerHTML = `${answer}`;
         //define onclick with actual answer index and correct answer index
         getId(`answer-card-${i}`).setAttribute("onclick", `checkAnswer(${i},${correctAnswerIndex})`);
+        // getId(`answer-card-${i}`).onclick =`checkAnswer(${i},${correctAnswerIndex})`;
+        //(re)set card color
+        getId(`answer-card-${i}`).style.backgroundColor = "white";
     }
 }
 
 function updateProgressBar() {
     let donePct = Math.round(numberOfQuestionsAnswered / numberOfQuestions * 10000) / 100;
-    console.log(donePct);
     const progress = getId("progress-bar");
     progress.style.width = `${donePct}%`;
     progress.setAttribute("aria-valuenow", `${donePct}`);
@@ -56,7 +59,7 @@ function updateProgressBar() {
 
 function updateCounter(index) {
     const counter = getId("counter");
-    counter.innerHTML = `Frage <b>${index+1}</b> von <b>${numberOfQuestions}</b>`;
+    counter.innerHTML = `Frage <b>${index + 1}</b> von <b>${numberOfQuestions}</b>`;
 }
 
 function renderFooter(index) {
@@ -82,15 +85,21 @@ function checkAnswer(clickedIndex, correctIndex) {
     //wrong answer
     if (clickedIndex != correctIndex) {
         console.log('falsch');
-        clickedAnswer.style.backgroundColor = "red!important";
-        correctAnswer.style.backgroundColor = "var(--bs-teal-300)!important";
+        clickedAnswer.style.backgroundColor = "#FF5C00";//red
+        correctAnswer.style.backgroundColor = "#B4D639";//green
     } else {//correct answer
         console.log('richtig');
-        clickedAnswer.style.backgroundColor = "var(--bs-teal-300)!important";
+        clickedAnswer.style.backgroundColor = "#B4D639";//green
         numberOfCorrectAnswers++;
     }
     numberOfQuestionsAnswered++;
     updateProgressBar();
-    getId("next-button").disabled=false;
+
+    //disable onclick for all answer cards
+    for (let i = 0; i < numberOfAnswers; i++) {
+        getId(`answer-card-${i}`).onclick = null;
+    }
+    //enable next-button
+    getId("next-button").disabled = false;
 }
 function showResult() { }
