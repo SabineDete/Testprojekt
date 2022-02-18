@@ -21,7 +21,6 @@ body {
 
 .quiz-card {
     width: 50vw;
-
     background-color: var(--bs-gray-100);
 }
 
@@ -31,4 +30,27 @@ body {
     height: 40px;
     background-color: var(--bs-gray-400);
 
+}
+
+.question-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 800px) {
+    .quiz-card {
+        width: 90vw;
+    }
+
+    .card-img-top {
+        flex:1;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .question-footer {
+        display: block;
+        text-align: center;
+    }
 }

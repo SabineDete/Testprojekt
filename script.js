@@ -19,13 +19,14 @@ function fisherYatesShuffle() {
 
 function renderNextButton(index) {
     let button = getId("next-button");
-    if (index < questions.length - 1) {
-        button.setAttribute("onclick", `renderQuestion(${index + 1})`);
+    if (index < numberOfQuestions - 1) {
+        button.setAttribute("onclick", `renderCard(${index + 1})`);
     }
     else {
         button.innerHTML = 'Ergebnis';
         button.setAttribute("onclick", 'showResult()');
     }
+    button.disabled = true;
 }
 
 function renderQuestion(index) {
@@ -42,13 +43,36 @@ function renderQuestion(index) {
         //define onclick with actual answer index and correct answer index
         getId(`answer-card-${i}`).setAttribute("onclick", `checkAnswer(${i},${correctAnswerIndex})`);
     }
+}
+
+function updateProgressBar() {
+    let donePct = Math.round(numberOfQuestionsAnswered / numberOfQuestions * 10000) / 100;
+    console.log(donePct);
+    const progress = getId("progress-bar");
+    progress.style.width = `${donePct}%`;
+    progress.setAttribute("aria-valuenow", `${donePct}`);
+    progress.innerHTML = `${donePct}%`;
+}
+
+function updateCounter(index) {
+    const counter = getId("counter");
+    counter.innerHTML = `Frage <b>${index+1}</b> von <b>${numberOfQuestions}</b>`;
+}
+
+function renderFooter(index) {
+    updateProgressBar();
+    updateCounter(index);
     renderNextButton(index);
 }
 
+function renderCard(index) {
+    renderQuestion(index);
+    renderFooter(index);
+}
 
 
-function renderQuiz() {
-    renderQuestion(0);
+function init() {
+    renderCard(0);
 }
 /////////////////////////////////////////////////////////////
 
@@ -67,6 +91,6 @@ function checkAnswer(clickedIndex, correctIndex) {
     }
     numberOfQuestionsAnswered++;
     updateProgressBar();
+    getId("next-button").disabled=false;
 }
-function updateProgressBar(){}
 function showResult() { }
