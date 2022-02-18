@@ -1,5 +1,8 @@
 let questions = [];
 let numberOfQuestions;
+let numberOfAnswers = 4; //for each question
+let numberOfQuestionsAnswered = 0;
+let numberOfCorrectAnswers = 0;
 
 function loadQuestions() {
     
