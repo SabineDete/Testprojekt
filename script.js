@@ -32,7 +32,7 @@ function renderNextButton(index) {
 function renderQuestion(index) {
     let currentQuestion = questions[index];
     //show question
-    getId("card-title").innerHTML = currentQuestion['question'];
+    getId("card-title").innerHTML = currentQuestion.question;
     //randomize order of answer possibilities
     let shuffledOrder = fisherYatesShuffle();
     //show answer possibilities
@@ -84,11 +84,11 @@ function checkAnswer(clickedIndex, correctIndex) {
     let correctAnswer = getId(`answer-card-${correctIndex}`);
     //wrong answer
     if (clickedIndex != correctIndex) {
-        console.log('falsch');
+        audioFail.play();
         clickedAnswer.style.backgroundColor = "#FF5C00";//red
         correctAnswer.style.backgroundColor = "#B4D639";//green
     } else {//correct answer
-        console.log('richtig');
+        audioSuccess.play();
         clickedAnswer.style.backgroundColor = "#B4D639";//green
         numberOfCorrectAnswers++;
     }
