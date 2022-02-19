@@ -34,7 +34,7 @@
 
 
             <!-- start screen -->
-            <div id="startScreen" class="card-body bg-pale text-center  ">
+            <div id="startScreen" class="card-body bg-pale d-flex flex-column justify-content-center align-items-center text-center  ">
                 <h1 class="card-title ">Doggy Quiz</h1>
                 <p>powered by</p>
                 <div><img src="img/hundumhappy.png" alt="" width="35%"></div>
@@ -43,7 +43,7 @@
             </div>
 
             <!-- quizcard -->
-            <div id="game" class="card-body d-none">
+            <div id="game" class="card-body d-none ">
                 <h5 id="card-title" class="card-title p-2 mt-2">Card title</h5>
 
                 <div id="answer-card-0" class="card answer-card answer-card-hover mb-2">
@@ -81,9 +81,9 @@
             </div>
 
             <!-- result -->
-            <div id="result" class="card-body bg-pale text-center d-none">
+            <div id="result" class="card-body d-flex flex-column justify-content-center align-items-center bg-pale text-center d-none">
                 <h4  class="card-title ">Game over!</h4>
-                <img src="img/price.png" alt="" width="40%">
+                <img src="img/price.png" alt="" width="30%">
                 <p id="result-text" class="mt-2">Du hast 4 von 5 Fragen richtig beantwortet.</p>
                 <button onclick="startGame()" type="button" class="btn btn-success mt-3 mb-3">Noch einmal spielen</button>
             </div>

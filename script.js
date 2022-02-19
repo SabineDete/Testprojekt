@@ -1,3 +1,4 @@
+// helper functions////////////////////////////////////////////////////////
 function getId(id) {
     return document.getElementById(id);
 }
@@ -17,15 +18,19 @@ function fisherYatesShuffle() {
 }
 
 ////////////////////////////////////////////////////////
+function lastQuestion(index) {
+    return index == numberOfQuestions - 1;
+}
+
 function renderNextButton(index) {
     let button = getId("next-button");
-    if (index < numberOfQuestions - 1) {
-        button.innerHTML = 'Nächste Frage';
-        button.setAttribute("onclick", `renderCard(${index + 1})`);
-    }
-    else {
+    if (lastQuestion(index)) {
         button.innerHTML = 'Ergebnis';
         button.setAttribute("onclick", 'showResult()');
+    }
+    else {
+        button.innerHTML = 'Nächste Frage';
+        button.setAttribute("onclick", `renderCard(${index + 1})`);
     }
     // disable button til answer is selected
     button.disabled = true;
@@ -35,13 +40,17 @@ function renderQuestion(index) {
     let currentQuestion = questions[index];
     //show question text
     getId("card-title").innerHTML = currentQuestion.question;
+}
+
+function renderAnswers(index) {
+    let currentQuestion = questions[index];
     //randomize order of answer possibilities
     let shuffledOrder = fisherYatesShuffle();
     //render answer possibilities
     for (let i = 0; i < numberOfAnswers; i++) {
         const answer = currentQuestion.answers[shuffledOrder[i]];
         const correctAnswerIndex = shuffledOrder.indexOf(currentQuestion.correctIndex);
-        const answerCard=getId(`answer-card-${i}`);
+        const answerCard = getId(`answer-card-${i}`);
         // show answer text
         getId(`answer-${i}`).innerHTML = `${answer}`;
         //define onclick with actual answer index and correct answer index
@@ -53,20 +62,11 @@ function renderQuestion(index) {
     }
 }
 
-function checkAnswer(clickedIndex, correctIndex) {
-    let clickedAnswer = getId(`answer-card-${clickedIndex}`);
-    let correctAnswer = getId(`answer-card-${correctIndex}`);
-    
-    if (clickedIndex != correctIndex) {//wrong answer
-        audioFail.play();
-        clickedAnswer.style.backgroundColor = "#FF5C00";//red
-        correctAnswer.style.backgroundColor = "#B4D639";//green
-    } else {//correct answer
-        audioSuccess.play();
-        clickedAnswer.style.backgroundColor = "#B4D639";//green
-        numberOfCorrectAnswers++;
-    }
-    numberOfQuestionsAnswered++;
+function selectionCorrect(clickedIndex, correctIndex) {
+    return clickedIndex == correctIndex;
+}
+
+function setAfterSelectionCardStyle() {
     updateProgressBar();
 
     //disable onclick and hover for all answer cards
@@ -76,6 +76,24 @@ function checkAnswer(clickedIndex, correctIndex) {
     }
     //enable next-button
     getId("next-button").disabled = false;
+}
+
+
+function checkAnswer(clickedIndex, correctIndex) {
+    let clickedAnswer = getId(`answer-card-${clickedIndex}`);
+    let correctAnswer = getId(`answer-card-${correctIndex}`);
+
+    if (selectionCorrect(clickedIndex, correctIndex)) {//correct answer
+        audioSuccess.play();
+        clickedAnswer.style.backgroundColor = "#B4D639";//green
+        numberOfCorrectAnswers++;
+    } else {//wrong answer
+        audioFail.play();
+        clickedAnswer.style.backgroundColor = "#FF5C00";//red
+        correctAnswer.style.backgroundColor = "#B4D639";//green
+    }
+    numberOfQuestionsAnswered++;
+    setAfterSelectionCardStyle();
 }
 
 function updateProgressBar() {
@@ -91,14 +109,20 @@ function updateCounter(index) {
     counter.innerHTML = `Frage <b>${index + 1}</b> von <b>${numberOfQuestions}</b>`;
 }
 
+function allAnswersCorrect() {
+    return numberOfCorrectAnswers == numberOfQuestions;
+}
+
+
 function showResult() {
     audioFinal.play();
+    //show result screen
     getId('game').classList.add('d-none');
     getId('result').classList.remove('d-none');
 
     getId('result-text').innerHTML = `Du hast <b>${numberOfCorrectAnswers}</b> von <b>${numberOfQuestions}</b> Fragen richtig beantwortet.`;
-    // all answers correct
-    if (numberOfCorrectAnswers == numberOfQuestions) {
+
+    if (allAnswersCorrect()) {
         confetti.start();
         setTimeout(confetti.stop, 4000);
     }
@@ -106,6 +130,7 @@ function showResult() {
 
 function renderCard(index) {
     renderQuestion(index);
+    renderAnswers(index);
     updateProgressBar();
     updateCounter(index);
     renderNextButton(index);
@@ -114,6 +139,7 @@ function renderCard(index) {
 function startGame() {
     numberOfQuestionsAnswered = 0;
     numberOfCorrectAnswers = 0;
+    // show game screen
     getId('startScreen').classList.add('d-none');
     getId('game').classList.remove('d-none');
     getId('result').classList.add('d-none');
