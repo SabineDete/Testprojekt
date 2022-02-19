@@ -34,7 +34,6 @@ function renderNextButton(index) {
 function renderQuestion(index) {
     let currentQuestion = questions[index];
     //show question text
-    console.log(currentQuestion['question']);
     getId("card-title").innerHTML = currentQuestion.question;
     //randomize order of answer possibilities
     let shuffledOrder = fisherYatesShuffle();
