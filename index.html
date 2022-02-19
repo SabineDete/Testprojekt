@@ -34,12 +34,13 @@
 
 
             <!-- start screen -->
-            <div id="startScreen" class="card-body bg-pale d-flex flex-column justify-content-center align-items-center text-center  ">
+            <div id="startScreen" class="card-body bg-pale d-flex flex-column justify-content-center align-items-center text-center position-relative ">
                 <h1 class="card-title ">Doggy Quiz</h1>
                 <p>powered by</p>
                 <div><img src="img/hundumhappy.png" alt="" width="35%"></div>
                 
                 <button onclick="startGame()" type="button" class="btn btn-success mt-4 mb-4">Start</button>
+                <img id="volume" src="img/volume-off.png" alt="Ton aus" title="Ton aus" onclick="toggleVolume()" class="position-absolute opacity-50" style="bottom:16px;right:16px;">
             </div>
 
             <!-- quizcard -->
