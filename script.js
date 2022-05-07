@@ -3,6 +3,7 @@ function getId(id) {
     return document.getElementById(id);
 }
 
+
 /** Random shuffle of numbers in an array *  
  * @returns {array} with shuffled numbers
  */
@@ -40,6 +41,7 @@ function toggleVolume() {
     }
 }
 
+
 /**
  * returns true if the current question is the last one
  * @param {integer} index 
@@ -48,6 +50,8 @@ function toggleVolume() {
 function lastQuestion(index) {
     return index == numberOfQuestions - 1;
 }
+
+
 /**
  * Adjusts text and onclick of next-button 
  * disables the button
@@ -67,17 +71,19 @@ function renderNextButton(index) {
     button.disabled = true;
 }
 
+
 function renderQuestion(index) {
     let currentQuestion = questions[index];
     //show question text
     getId("card-title").innerHTML = currentQuestion.question;
 }
 
+
 /**
  * Randomly shuffles answer possibilities and shows them in the quiz card
  * defines onclick-function for answers
  * resets answer styles
- * @param {integer} index 
+ * @param {integer} - index of question
  */
 function renderAnswers(index) {
     let currentQuestion = questions[index];
@@ -91,13 +97,14 @@ function renderAnswers(index) {
         // show answer text
         getId(`answer-${i}`).innerHTML = `${answer}`;
         //define onclick with actual answer index and correct answer index
-        answerCard.setAttribute("onclick", `checkAnswer(${i},${correctAnswerIndex})`);
-        // getId(`answer-card-${i}`).onclick =`checkAnswer(${i},${correctAnswerIndex})`;
+        // answerCard.setAttribute("onclick", `checkAnswer(${i},${correctAnswerIndex})`);
+        getId(`answer-card-${i}`).onclick = function () { checkAnswer(i, correctAnswerIndex) };
         //(re)set card color and hover effect
         answerCard.style.backgroundColor = "white";
         answerCard.classList.add("answer-card-hover");
     }
 }
+
 
 /**
  * is true if the selected answer is correct
@@ -108,6 +115,7 @@ function renderAnswers(index) {
 function selectionCorrect(clickedIndex, correctIndex) {
     return clickedIndex == correctIndex;
 }
+
 
 /**
  * updates progress bar
@@ -125,6 +133,7 @@ function setAfterSelectionCardStyle() {
     //enable next-button
     getId("next-button").disabled = false;
 }
+
 
 /**
  * marks correct and wrong answers with background colors and plays sound
@@ -150,6 +159,7 @@ function checkAnswer(clickedIndex, correctIndex) {
     setAfterSelectionCardStyle();
 }
 
+
 /**
  * calculates and shows progress in progress bar
  */
@@ -161,6 +171,7 @@ function updateProgressBar() {
     progress.innerHTML = `${donePct}%`;
 }
 
+
 /**
  * shows progress in text form
  * @param {integer} index 
@@ -170,6 +181,7 @@ function updateCounter(index) {
     counter.innerHTML = `Frage <b>${index + 1}</b> von <b>${numberOfQuestions}</b>`;
 }
 
+
 /**
  * true if all questions were answered correctly
  * @returns {boolean}
@@ -177,6 +189,7 @@ function updateCounter(index) {
 function allAnswersCorrect() {
     return numberOfCorrectAnswers == numberOfQuestions;
 }
+
 
 /**
  * shows result screen with number of correct answers and sound
@@ -196,6 +209,7 @@ function showResult() {
     }
 }
 
+
 /**
  * renders complete quiz card for question with index
  * @param {integer} index 
@@ -207,6 +221,7 @@ function renderCard(index) {
     updateCounter(index);
     renderNextButton(index);
 }
+
 
 /**
  * resets variables for restarted game

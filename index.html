@@ -6,12 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 
     <!-- bootstrap files -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -28,70 +23,112 @@
 
 <body onload="loadQuestions();">
 
-    <!-- <div class="container-fluid d-flex justify-content-center align-items-center"> -->
-        <div class="card quiz-card">
-            <img src="img/wallpaper.png" class="card-img-top">
+    <div class="card quiz-card">
+        <img src="img/wallpaper.png" class="card-img-top">
 
 
-            <!-- start screen -->
-            <div id="startScreen" class="card-body bg-pale d-flex flex-column justify-content-center align-items-center text-center position-relative ">
-                <h1 class="card-title ">Doggy Quiz</h1>
-                <p>powered by</p>
-                <div><img src="img/hundumhappy.png" alt="" width="35%"></div>
-                
-                <button onclick="startGame()" type="button" class="btn btn-success mt-4 mb-4">Start</button>
-                <img id="volume" src="img/volume-off.png" alt="Ton aus" title="Ton aus" onclick="toggleVolume()" class="btn position-absolute opacity-50" style="bottom:16px;right:16px;">
+        <!-- start screen -->
+        <div id="startScreen" class="card-body bg-pale d-flex flex-column  text-center justify-content-center p-4 ">
+            <h1 class="card-title ">Doggy Quiz</h1>
+            <p>powered by</p>
+            <div><img src="img/hundumhappy.png" alt="Logo" width="35%"></div>
+
+            <div class="d-flex justify-content-between align-items-center  mt-4  ">
+                <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#legalModal">
+                    About
+                </button>
+                <button onclick="startGame()" type="button" class="btn btn-success ">
+                    Start
+                </button>
+                <img id="volume" src="img/volume-off.png" alt="Ton aus" title="Ton aus" onclick="toggleVolume()"
+                    class="btn p-0 opacity-50">
             </div>
-
-            <!-- quizcard -->
-            <div id="game" class="card-body d-none ">
-                <h5 id="card-title" class="card-title p-2 mt-2">Card title</h5>
-
-                <div id="answer-card-0" class="card answer-card answer-card-hover mb-2">
-                    <div class="card-body d-flex align-items-center">
-                        <div class="answer-letter p-2 me-4  bg-gradient ">A</div>
-                        <span id="answer-0"></span>
-                    </div>
-                </div>
-                <div id="answer-card-1" class="card answer-card answer-card-hover mb-2">
-                    <div class="card-body d-flex align-items-center">
-                        <div class="answer-letter p-2 me-4  bg-gradient ">B</div>
-                        <span id="answer-1"></span>
-                    </div>
-                </div>
-                <div id="answer-card-2" class="card answer-card answer-card-hover mb-2">
-                    <div class="card-body d-flex align-items-center">
-                        <div class="answer-letter p-2 me-4  bg-gradient ">C</div>
-                        <span id="answer-2"></span>
-                    </div>
-                </div>
-                <div id="answer-card-3" class="card answer-card answer-card-hover mb-2 ">
-                    <div class="card-body d-flex align-items-center">
-                        <div class="answer-letter p-2 me-4  bg-gradient ">D</div>
-                        <span id="answer-3"></span>
-                    </div>
-                </div>
-                <div class="progress">
-                    <div id="progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 0%"
-                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-                </div>
-                <div class="question-footer mt-3 mb-3 ">
-                    <span id="counter"></span>
-                    <button id="next-button" type="button" class="btn btn-success" disabled>Nächste Frage</button>
-                </div>
-            </div>
-
-            <!-- result -->
-            <div id="result" class="card-body d-flex flex-column justify-content-center align-items-center bg-pale text-center d-none">
-                <h4  class="card-title ">Game over!</h4>
-                <img src="img/price.png" alt="" width="30%">
-                <p id="result-text" class="mt-2">Du hast 4 von 5 Fragen richtig beantwortet.</p>
-                <button onclick="startGame()" type="button" class="btn btn-success mt-3 mb-3">Noch einmal spielen</button>
-            </div>
-
         </div>
-    </div>
 
+        <!-- modal for legal notice -->
+        <div class="modal fade" id="legalModal" tabindex="-1" aria-labelledby="legalModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="legalModalLabel">Impressum</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Angaben gemäß § 5 TMG</p>
+                        <p>Sabine Detering <br>
+                            Heideweg 14A<br>
+                            76149 Karlsruhe <br>
+                        </p>
+                        <p> <strong>Vertreten durch: </strong><br>
+                            Sabine Detering<br>
+                        </p>
+                        <p><strong>Kontakt:</strong> <br>
+                            Telefon: 0152-53458810<br>
+                            E-Mail: <a href='mailto:sabine.detering@web.de'>sabine.detering@web.de</a><br>
+                        </p>
+                        <br>
+                        <p> Impressum vom <a href="https://www.impressum-generator.de">Impressum Generator</a> der <a
+                                href="https://www.kanzlei-hasselbach.de/">Kanzlei Hasselbach, Rechtsanwälte für
+                                Arbeitsrecht und
+                                Familienrecht</a>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-pokeblue" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- quizcard -->
+        <div id="game" class="card-body d-none ">
+            <h5 id="card-title" class="card-title p-2 mt-2">Card title</h5>
+
+            <div id="answer-card-0" class="card answer-card answer-card-hover mb-2">
+                <div class="card-body d-flex align-items-center">
+                    <div class="answer-letter p-2 me-4  bg-gradient ">A</div>
+                    <span id="answer-0"></span>
+                </div>
+            </div>
+            <div id="answer-card-1" class="card answer-card answer-card-hover mb-2">
+                <div class="card-body d-flex align-items-center">
+                    <div class="answer-letter p-2 me-4  bg-gradient ">B</div>
+                    <span id="answer-1"></span>
+                </div>
+            </div>
+            <div id="answer-card-2" class="card answer-card answer-card-hover mb-2">
+                <div class="card-body d-flex align-items-center">
+                    <div class="answer-letter p-2 me-4  bg-gradient ">C</div>
+                    <span id="answer-2"></span>
+                </div>
+            </div>
+            <div id="answer-card-3" class="card answer-card answer-card-hover mb-2 ">
+                <div class="card-body d-flex align-items-center">
+                    <div class="answer-letter p-2 me-4  bg-gradient ">D</div>
+                    <span id="answer-3"></span>
+                </div>
+            </div>
+            <div class="progress">
+                <div id="progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 0%"
+                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+            </div>
+            <div class="question-footer mt-3 mb-3 ">
+                <span id="counter"></span>
+                <button id="next-button" type="button" class="btn btn-success" disabled>Nächste Frage</button>
+            </div>
+        </div>
+
+        <!-- result -->
+        <div id="result"
+            class="card-body d-flex flex-column justify-content-center align-items-center bg-pale text-center d-none">
+            <h2 class="card-title ">Game over!</h2>
+            <img src="img/price.png" alt="" width="30%">
+            <p id="result-text" class="mt-2">Du hast 4 von 5 Fragen richtig beantwortet.</p>
+            <button onclick="startGame()" type="button" class="btn btn-success mt-3 mb-3">Noch einmal spielen</button>
+        </div>
+
+    </div>
 </body>
 
 </html>

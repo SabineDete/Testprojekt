@@ -1,5 +1,4 @@
 body {
-    /* overflow: hidden; */
     background-image: url("img/wiese.jpg");
     background-size: cover;
     background-position: bottom;
@@ -10,6 +9,66 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* rubik-regular - latin */
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/rubik-v20-latin-regular.eot');
+    /* IE9 Compat Modes */
+    src: local(''),
+        url('fonts/rubik-v20-latin-regular.eot?#iefix') format('embedded-opentype'),
+        /* IE6-IE8 */
+        url('fonts/rubik-v20-latin-regular.woff2') format('woff2'),
+        /* Super Modern Browsers */
+        url('fonts/rubik-v20-latin-regular.woff') format('woff'),
+        /* Modern Browsers */
+        url('fonts/rubik-v20-latin-regular.ttf') format('truetype'),
+        /* Safari, Android, iOS */
+        url('fonts/rubik-v20-latin-regular.svg#Rubik') format('svg');
+    /* Legacy iOS */
+}
+
+/* rubik-500 - latin */
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 500;
+    src: url('fonts/rubik-v20-latin-500.eot');
+    /* IE9 Compat Modes */
+    src: local(''),
+        url('fonts/rubik-v20-latin-500.eot?#iefix') format('embedded-opentype'),
+        /* IE6-IE8 */
+        url('fonts/rubik-v20-latin-500.woff2') format('woff2'),
+        /* Super Modern Browsers */
+        url('fonts/rubik-v20-latin-500.woff') format('woff'),
+        /* Modern Browsers */
+        url('fonts/rubik-v20-latin-500.ttf') format('truetype'),
+        /* Safari, Android, iOS */
+        url('fonts/rubik-v20-latin-500.svg#Rubik') format('svg');
+    /* Legacy iOS */
+}
+
+/* rubik-700 - latin */
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 700;
+    src: url('fonts/rubik-v20-latin-700.eot');
+    /* IE9 Compat Modes */
+    src: local(''),
+        url('fonts/rubik-v20-latin-700.eot?#iefix') format('embedded-opentype'),
+        /* IE6-IE8 */
+        url('fonts/rubik-v20-latin-700.woff2') format('woff2'),
+        /* Super Modern Browsers */
+        url('fonts/rubik-v20-latin-700.woff') format('woff'),
+        /* Modern Browsers */
+        url('fonts/rubik-v20-latin-700.ttf') format('truetype'),
+        /* Safari, Android, iOS */
+        url('fonts/rubik-v20-latin-700.svg#Rubik') format('svg');
+    /* Legacy iOS */
 }
 
 .d-none {
@@ -29,8 +88,8 @@ body {
 }
 
 .card-img-top {
-    min-height:110px;
-    height:25vh;
+    min-height: 110px;
+    height: 25vh;
     max-height: 200px;
     object-fit: cover;
     object-position: center;
@@ -70,6 +129,10 @@ body {
 
 
 @media (max-width: 800px) {
+    body {
+        background-position-x: right;
+    }
+
     .quiz-card {
         width: 90vw;
     }
@@ -78,14 +141,13 @@ body {
 @media (max-width: 450px) {
     .quiz-card {
         width: 100vw;
-        height: 100vh;
     }
 }
-/* 
-@media (max-width: 540px) {
+
+@media (max-height:700px) {
     .quiz-card {
-        width: 100vw;
         height: 100vh;
+        overflow-y: auto;
     }
 
-} */
+}
